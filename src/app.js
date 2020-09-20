@@ -4,8 +4,9 @@ const hbs = require('hbs')
 const geocode = require('./utils/geocode')
 const forecast = require('./utils/forecast')
 
-// Creates an express application
+// Creates an express application using port number from environment variable else use default
 const app = express()
+const port = process.env.PORT || 3000
 
 // Define paths for express configuration
 const publicDirPath = path.join(__dirname, '../public')
@@ -75,12 +76,6 @@ app.get('/weather', (req, res) => {
             })
         })
     })
-
-    // res.send({
-    //     address: req.query.address,
-    //     forecast: 'Overcast',
-    //     location: 'Stockport'
-    // })
 })
 
 app.get('/products', (req, res) => {
@@ -113,7 +108,6 @@ app.get('*', (req, res) => {
     })
 })
 
-const port = 3000
 app.listen(port, () => {
     console.log('Server is running on port:' + port)
 })
